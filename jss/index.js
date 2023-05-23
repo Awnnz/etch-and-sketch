@@ -4,6 +4,7 @@ let newBoardButton = document.querySelector('.newBoard');
 let colorButton = document.querySelector('.changeColor');
 let rainbowButton = document.querySelector('.rainbowColor')
 let gradualButton = document.querySelector('.gradual')
+let click = true;
 
 newBoardButton.addEventListener('click', () => {
   let value = +prompt('Size of Board?');
@@ -16,7 +17,7 @@ newBoardButton.addEventListener('click', () => {
   createboard(value)
 })
 
-colorButton.addEventListener('click', changeColor)
+colorButton.addEventListener('click', randomColor)
 rainbowButton.addEventListener('click', rainbowColor)
 gradualButton.addEventListener('click', rainbowGradualBlack)
 
@@ -47,7 +48,8 @@ function createboard(size) {
 
   let square = document.querySelectorAll('.vertical');
   square.forEach(square => square.addEventListener('mouseover', () => {
-    square.style.backgroundColor = "red";
+    if (click) square.style.backgroundColor = "red";
+    
   }))
 }
 
@@ -57,14 +59,14 @@ function clearBoard() {
     squares.forEach(square => square.remove())
   }
 
-function changeColor() {
+function randomColor() {
   let square = document.querySelectorAll('.vertical');
   let arr = [];
   for (let i = 0; i < 3; i++) {
     arr[i] = ~~(Math.random() * 255);
   }
   square.forEach(square => square.addEventListener('mouseover', () => {
-    square.style.backgroundColor = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
+    if (click) square.style.backgroundColor = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
   }))
 }
 
@@ -79,7 +81,7 @@ function rainbowColor() {
     for (let i = 0; i < 3; i++) {
     arr[i] = ~~(Math.random() * 255);
     }
-    square.style.backgroundColor = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
+    if (click) square.style.backgroundColor = `rgb(${arr[0]}, ${arr[1]}, ${arr[2]})`;
   }))
 }
 
@@ -91,10 +93,16 @@ function rainbowGradualBlack() {
     for (let i = 0; i < 3; i++) {
     arr[i] = ~~(Math.random() * 255);
     }
-    square.style.backgroundColor = `rgb(${arr[0]*darkBuffer}, ${arr[1]*darkBuffer}, ${arr[2]*darkBuffer})`;
+    if (click) square.style.backgroundColor = `rgb(${arr[0]*darkBuffer}, ${arr[1]*darkBuffer}, ${arr[2]*darkBuffer})`;
     darkBuffer -= .10;
   }))
 }
+
+document.querySelector('.main-container').addEventListener('click', () => {
+  let mode = document.querySelector('.mode');
+  click = !click;
+  click ? mode.textContent = `Drawing Mode: On` :  mode.textContent = `Drawing Mode: Off`;
+})
 
 // END OF FUNCTIONS
 
