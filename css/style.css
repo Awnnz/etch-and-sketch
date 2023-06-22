@@ -11,6 +11,10 @@
     display: flex;
 }
 
+/* .main-container:hover {
+    cursor: pointer;
+} */
+
 .horizontal-container {
     /* border: 1px blue solid; */
     width: 6.25%;

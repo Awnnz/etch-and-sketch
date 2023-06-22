@@ -16,6 +16,15 @@ document.body.onmouseup = () => {
   document.querySelector('.mode').textContent = `Drawing Mode: Off`;
 }
 
+mainContainer.onmouseover = function(){
+  if (mouseDown) mainContainer.style.cursor = 'pointer';
+  else mainContainer.style.cursor = 'auto'
+};
+
+mainContainer.onmousedown = () => {
+  mainContainer.style.cursor = 'pointer';
+}
+
 colorButton.addEventListener('click', randomColor)
 rainbowButton.addEventListener('click', rainbowColor)
 gradualButton.addEventListener('click', rainbowGradualBlack)
